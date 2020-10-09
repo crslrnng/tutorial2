@@ -1,0 +1,50 @@
+﻿@page "/people/create"
+@inject HttpClient  httpClient
+@inject NavigationManager navigationManager
+
+<h3>Create</h3>
+
+<EditForm Model="@person" OnValidSubmit="@CreatePerson">
+    <DataAnnotationsValidator />
+    <div>
+        <label>Title</label>
+        <InputText @bind-Value="person.Title" />
+        <ValidationMessage For="@(()=>person.Title)" />
+    </div>
+    <div>
+        <label>First Name</label>
+        <InputText @bind-Value="person.FirstName" />
+        <ValidationMessage For="@(()=>person.FirstName)" />
+    </div>
+    <div>
+        <label>Last Name</label>
+        <InputText @bind-Value="person.LastName" />
+        <ValidationMessage For="@(()=>person.LastName)" />
+    </div>
+    <div>
+        <label>Email ID</label>
+        <InputText @bind-Value="person.Email" />
+        <ValidationMessage For="@(()=>person.Email)" />
+    </div>
+    <div>
+        <label>Phone Number</label>
+        <InputText @bind-Value="person.PhoneNumber" />
+        <ValidationMessage For="@(()=>person.PhoneNumber)" />
+    </div>
+    <div>
+        <label>Address</label>
+        <InputText @bind-Value="person.Address" />
+        <ValidationMessage For="@(()=>person.Address)" />
+    </div>
+    <button type="submit">Create Person</button>
+</EditForm>
+
+@code {
+    Person person = new Person();
+
+    async Task CreatePerson()
+    {
+        await httpClient.PostAsJsonAsync("api/people", person);
+        navigationManager.NavigateTo("/people");
+    }
+}

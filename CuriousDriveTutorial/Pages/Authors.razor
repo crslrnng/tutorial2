@@ -1,0 +1,15 @@
+﻿@page "/authors"
+@inject NavigationManager NavigationManager
+
+<h3>Authors</h3>
+<a href="/authors/author-details">JK Rowling</a>
+<hr />
+<button @onclick="Navigate">JK Rowling</button>
+
+@code {
+    void Navigate()
+    {
+        NavigationManager.NavigateTo("/authors/author-details");
+    }
+
+}
